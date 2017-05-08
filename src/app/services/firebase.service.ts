@@ -13,7 +13,7 @@ export class FirebaseService {
   userKey:any;
   user:any;
   folder:any;
-  
+  usagesgraph:FirebaseListObservable<any[]>;
 
   constructor(private af:AngularFire) {
   	this.folder="listingimages";
@@ -29,7 +29,7 @@ export class FirebaseService {
       }
       
   });
-   }
+       }
   getListings(userKey){
     this.usages = this.af.database.object('/users/' + userKey) as FirebaseObjectObservable<usage>
     return this.usages;
@@ -88,14 +88,20 @@ export class FirebaseService {
   }
 
   getuserinfo(id){
-    this.usage = this.af.database.object('/users/' + id) as FirebaseObjectObservable<usage>
+    this.usage = this.af.database.object('/user_info/' + id) as FirebaseObjectObservable<usage>
     return this.usage;
 
 
   }
   getusage(id){
 
-    this.data = this.af.database.list('/usage/' + id) as FirebaseListObservable<cd[]>
+    this.data = this.af.database.list('/usage/' + id, {
+      query: {
+        
+        limitToLast: 5
+      }
+      
+    }) as FirebaseListObservable<cd[]>
     return this.data;
 
 

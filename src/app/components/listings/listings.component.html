@@ -21,13 +21,14 @@
                 <div class="row">
                   
 
-                    <div class="col-md-15">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Usage</h4>
                                 
                             </div>
                             <div class="content">
+                           
                                 <div id="chartHours" class="ct-chart"><div id="column_chart" [chartData]="this.column_ChartData" [chartOptions] = "this.column_ChartOptions" chartType="ColumnChart" GoogleChart></div></div>
                                 <div class="footer">
                                    
@@ -35,37 +36,11 @@
                                     
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
-
-
-
-                <div class="row">
-                    <div class="col-md-15">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">EVSE usage E2W and E4W</h4>
-                                <p class="category">Monthy usage.</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
-
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> S1 - 1 connector
-                                        <i class="fa fa-circle text-danger"></i> S3 - 3 connectors
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-check"></i> Data information certified
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                   <div class="col-md-12">
+<div class="col-md-15">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Usage Log</h4>
@@ -95,6 +70,33 @@
                             </div>
                         </div>
                     </div>
+
+
+                <div class="row">
+                    <div class="col-md-15">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">EVSE usage E2W and E4W</h4>
+                                <p class="category">Monthy usage.</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartActivity" class="ct-chart"></div>
+
+                                <div class="footer">
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-info"></i> S1 - 1 connector
+                                        <i class="fa fa-circle text-danger"></i> S3 - 3 connectors
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-check"></i> Data information certified
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
                 </div>
             </div>
         </div>

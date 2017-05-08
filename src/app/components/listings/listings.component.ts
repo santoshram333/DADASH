@@ -41,34 +41,42 @@ export class ListingsComponent implements OnInit {
           this.usages=usages;
      console.log(this.usages); 
      
-    var a = new Array(3);
-  for (var i = 0;i < 3;i++){
+    var a = new Array(5);
+
+    var b = new Array(5);
+
+    var c = new Array(5);
+    var d = new Array(5);
+  for (var i = 0;i < this.usages.length;i++){
 
      a[i] = this.usages[i].cost;
-  
-    
+     b[i] = this.usages[i].$key;
+     c[i] = this.usages[i].usage;
+     d[i] = this.usages[i].duration;
+   } 
     
 
 
     this.column_ChartData = [
-        ['City', '2010 Population', '2000 Population'],
-        ['New York City, NY', a[i], a[i] ],
-        ['Los Angeles, CA', 3792000, 3694000],
-        ['Chicago, IL', 2695000, 2896000],
-        ['Houston, TX', 2099000, 1953000],
-        ['Philadelphia, PA', 1526000, 1517000]];  
+        ['Time', 'Cost', 'Usage','Duration'],
+        [b[0] , a[0] , c[0], d[0]],
+        [b[1] , a[1] , c[1], d[1]],
+        [b[2] , a[2] , c[2], d[2]],
+        [b[3] , a[3] , c[3], d[3]],
+        [b[4] , a[4] , c[4], d[4]]
+        ];  
          
-}
+
   });
   
   
 
 }
 public column_ChartOptions = {
-        title: 'Population of Largest U.S. Cities',
-        chartArea: { width: '50%' },
+        title: '',
+        chartArea: { width: '70%' },
         hAxis: {
-            title: 'Total Population',
+            title: 'Time',
             minValue: 0,
             textStyle: {
                 bold: true,
@@ -82,14 +90,14 @@ public column_ChartOptions = {
             }
         },
         vAxis: {
-            title: 'City',
+            title: 'Usage,Duration,Cost',
             textStyle: {
-                fontSize: 14,
+                fontSize: 12,
                 bold: true,
                 color: '#848484'
             },
             titleTextStyle: {
-                fontSize: 14,
+                fontSize: 12,
                 bold: true,
                 color: '#848484'
             }
