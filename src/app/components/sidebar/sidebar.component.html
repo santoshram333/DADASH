@@ -1,0 +1,44 @@
+<div class="sidebar" data-color="blue" data-image-src="assets/img/sidebar-6.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <br>
+                   
+               
+            </div>
+
+            <ul class="nav">
+                <li >
+                    <a [routerLink]="(['/listings'])">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="userprofile()">
+                        <i class="pe-7s-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a >
+                        <i class="pe-7s-note2"></i>
+                        <p>Device List</p>
+                    </a>
+                </li>
+               <li>
+                    <a >
+                        <i class="pe-7s-map-marker"></i>
+                        <p>Maps</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
