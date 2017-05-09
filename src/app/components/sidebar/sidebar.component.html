@@ -22,17 +22,25 @@
                     </a>
                 </li>
                 <li>
-                    <a (click)="userprofile()">
-                        <i class="pe-7s-user"></i>
+                    <a [routerLink]="(['/userprofile'])">
+                        <i class="pe-7s-users"></i>
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li>
-                    <a >
-                        <i class="pe-7s-note2"></i>
-                        <p>Device List</p>
-                    </a>
-                </li>
+               <li>
+                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-2">
+                            <span class="sidebar-icon"><i class="pe-7s-box2"></i></span>
+                            <span class="sidebar-title "><a (click) = "getdevicelist()">Devices</a></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id="submenu-2" class="panel-collapse collapse panel-switch" role="menu">
+                        <ul *ngFor="let items of devices">
+                        <li><a [routerLink]="['/listing/'+ items.$key]">{{items.$key}}</a></li>
+                        <li>Add a Device</li></ul></ul>
+                        
+                            
+                       
+                    </li>
                <li>
                     <a >
                         <i class="pe-7s-map-marker"></i>

@@ -18,6 +18,7 @@ import { EditListingComponent } from './components/edit-listing/edit-listing.com
 import { FirebaseService } from './services/firebase.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { AdddeviceComponent } from './components/adddevice/adddevice.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDTBig8HtTwZhJFDs2xifl3LlplUDZcxok',
@@ -52,7 +53,8 @@ const appRoutes : Routes = [
     EditListingComponent,
     SidebarComponent,
     UserprofileComponent,
-    GoogleChart
+    GoogleChart,
+    AdddeviceComponent
   ],
   imports: [
     BrowserModule,

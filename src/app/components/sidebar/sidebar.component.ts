@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../../services/firebase.service';
+import { AngularFire } from 'angularfire2';
 import {Router,Route,ActivatedRoute} from '@angular/router';
+import {FirebaseAuthState} from 'angularfire2';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {  FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,13 +13,41 @@ import {Router,Route,ActivatedRoute} from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+
+user:any;
+userKey:any;
+uid:any;
+devices:any;
+usage:any;
+
+  constructor(public af:AngularFire,private firebaseService:FirebaseService,private router:Router,private auth:AngularFireAuth) 
+  {
+
+  	this.af.auth.subscribe((auth) => {
+    if (auth) {
+       
+          
+          this.user = this.af.database.object('users/' + auth.uid);
+          this.userKey = auth.uid;
+          //console.log(this.userKey);
+        
+      }
+      
+  });
+
+   }
 
   ngOnInit() {
-  }
- userprofile(){
-this.router.navigate(['/userprofile']);
-
+		 
+ 
+}
+getdevicelist()
+{
+	 this.firebaseService.getdevices(this.userKey).subscribe(devices => {
+          this.devices=devices;
+          console.log(this.devices);
+     });
+}
 
  }
-}
+

@@ -15,29 +15,22 @@ export class UserprofileComponent implements OnInit {
   userKey:any;
   uid:any;
   usages:any;
+  name:any;
   constructor(public af:AngularFire,private firebaseService:FirebaseService,private router:Router,private auth:AngularFireAuth) {
 
-  	this.af.auth.subscribe((auth) => {
-    if (auth) {
-       
 
-         this.user = this.af.database.object('users/' + auth.uid);
-          this.userKey = auth.uid;
-          console.log(this.userKey);
-        
-      }
-      else{
-
-         this.router.navigate(['']);
-
-      }
-  });
-
-
+ 
    }
 
   ngOnInit() {
-  this.firebaseService.getuserinfo(this.userKey).subscribe(usages => {
+ this.af.auth.subscribe((auth) => {
+    if (auth) {
+       
+          this.name=auth;
+         this.user = this.af.database.object('/users/' + auth.uid);
+          this.userKey = auth.uid;
+          console.log(this.userKey);
+        this.firebaseService.getuserinfo(this.userKey).subscribe(usages => {
   this.usages=usages;
   console.log(this.usages);
 
@@ -45,6 +38,13 @@ export class UserprofileComponent implements OnInit {
 
 
 });
+      }
+      else{
+
+         this.router.navigate(['']);
+
+      }
+  });
   }
 
 }

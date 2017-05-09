@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import * as firebase from 'firebase';
-
+import { Router, ActivatedRoute, Params} from '@angular/router';
 @Injectable()
 export class FirebaseService {
 
@@ -14,8 +14,11 @@ export class FirebaseService {
   user:any;
   folder:any;
   usagesgraph:FirebaseListObservable<any[]>;
-
-  constructor(private af:AngularFire) {
+  devices: FirebaseListObservable<any[]>;
+  device:FirebaseListObservable<any[]>;
+ devices2:FirebaseObjectObservable<any>;
+device3:FirebaseObjectObservable<any>;
+  constructor(private af:AngularFire,private router : Router,) {
   	this.folder="listingimages";
     this.listings = this.af.database.list('/listings') as FirebaseListObservable<Listing[]>
     this.af.auth.subscribe((auth) => {
@@ -95,9 +98,11 @@ export class FirebaseService {
   }
   getusage(id){
 
-    this.data = this.af.database.list('/usage/' + id, {
+   
+    this.data = this.af.database.list('/usage', {
       query: {
-        
+        orderByChild: 'user_id',
+        equalTo: id, 
         limitToLast: 5
       }
       
@@ -105,7 +110,97 @@ export class FirebaseService {
     return this.data;
 
 
+
   }
+
+  getusagetable(id){
+
+   
+    this.data = this.af.database.list('/usage', {
+      query: {
+        orderByChild: 'user_id',
+        equalTo: id
+      }
+      
+    }) as FirebaseListObservable<cd[]>
+    return this.data;
+
+
+
+  }
+
+  getdevices(id){
+
+    this.devices = this.af.database.list('/owners/' + id) as FirebaseListObservable<cd[]>
+    return this.devices;
+
+
+
+  }
+  getdevice(id){
+   
+    this.device = this.af.database.list('/usage', {
+      query: {
+        orderByChild: 'device_id',
+        equalTo: id, 
+        limitToLast: 5
+      }
+      
+    }) as FirebaseListObservable<cd[]>
+    
+
+    return this.device;
+
+  }
+
+    getdevicetable(id){
+    
+    this.device = this.af.database.list('/usage', {
+      query: {
+        orderByChild: 'device_id',
+        equalTo: id
+      }
+      
+    }) as FirebaseListObservable<cd[]>
+    
+
+    return this.device;
+
+  }
+
+ getdevicedata(id){
+    
+     this.devices = this.af.database.list('/devices/' + id) as FirebaseListObservable<device[]>
+    return this.devices;
+
+    
+
+  }
+
+  getport1(e){
+
+      this.device3 = this.af.database.object('/usage/' + e) as FirebaseObjectObservable<cd1>
+    
+
+    return this.device3;
+
+}
+getport2(e){
+
+      this.device3 = this.af.database.object('/usage/' + e) as FirebaseObjectObservable<cd1>
+    
+
+    return this.device3;
+
+}
+getport3(e){
+
+      this.device3 = this.af.database.object('/usage/' + e) as FirebaseObjectObservable<cd1>
+    
+
+    return this.device3;
+
+}
 }
 
 interface Listing{
@@ -133,3 +228,19 @@ $key?:string;
 $value?:string;
 
 }
+interface cd1{
+$key?:string;
+$value?:string;
+user_id?:string;
+usage?:string;
+duration?:string;
+device_id?:string;
+cost?:string;
+}
+interface device{
+$key?:string;
+cost?:string;
+master_ctrl?:any;
+
+}
+

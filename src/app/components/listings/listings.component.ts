@@ -4,6 +4,9 @@ import { AngularFire } from 'angularfire2';
 import {Router,Route,ActivatedRoute} from '@angular/router';
 import {FirebaseAuthState} from 'angularfire2';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {  FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+
+
 @Component({
   selector: 'app-listings',
   templateUrl: './listings.component.html',
@@ -16,30 +19,32 @@ export class ListingsComponent implements OnInit {
   uid:any;
   usages:any;
   usage:any;
+  usagetable:any;
   public column_ChartData:any[];
+  name:any;
+  msgs: FirebaseListObservable<any>;
+  msgVal: string = '';
  
 
   constructor(public af:AngularFire,private firebaseService:FirebaseService,private router:Router,private auth:AngularFireAuth) {
-    this.af.auth.subscribe((auth) => {
+    this.msgs = af.database.list('/messages', {
+      query: {
+        limitToLast: 10
+      }
+    });
+
+   this.af.auth.subscribe((auth) => {
     if (auth) {
        
+          
+     this.user = this.af.database.object('users/' + auth.uid);
+     this.userKey = auth.uid;
+    console.log(this.userKey);
+        this.firebaseService.getusage(this.userKey).subscribe(usages => {
+        this.usages=usages;
 
-         this.user = this.af.database.object('users/' + auth.uid);
-          this.userKey = auth.uid;
-          console.log(this.userKey);
-        
-      }
-      else{
-          this.router.navigate(['']);
-
-      }
-  });
-   }
-
-  ngOnInit() {
-  this.firebaseService.getusage(this.userKey).subscribe(usages => {
-          this.usages=usages;
-     console.log(this.usages); 
+    console.log(this.usages); 
+    
      
     var a = new Array(5);
 
@@ -68,10 +73,27 @@ export class ListingsComponent implements OnInit {
          
 
   });
-  
-  
+      this.firebaseService.getusagetable(this.userKey).subscribe(usagetable => {
+      this.usagetable=usagetable;
+
+      
+  });
+
+      }
+      
+  });
+
+   }
+
+  ngOnInit() {
 
 }
+
+public chatSend(theirMessage: string) {
+    this.msgs.push({ message: theirMessage, name: this.name.google.displayName});
+    this.msgVal = '';
+  }
+
 public column_ChartOptions = {
         title: '',
         chartArea: { width: '70%' },
@@ -103,4 +125,9 @@ public column_ChartOptions = {
             }
         }
     };
+    reroute(){
+
+       this.router.navigate(['/']);
+       console.log("working");
+    }
 }

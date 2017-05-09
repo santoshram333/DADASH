@@ -1,4 +1,4 @@
-<div *ngIf="listing">
+<!--<div *ngIf="listing">
 	<a [routerLink] = "['/listings']" >Go Back</a>
 	<br>
 	<h2 class="page-header">{{listing.title}} <small>{{listing.city}}</small></h2>
@@ -22,3 +22,172 @@
 
 	</div>
 </div>
+-->
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+
+<!doctype html>
+
+<html lang="en">
+
+<body>
+
+<div class="wrapper">
+  
+
+    <div class="main-panel">
+        
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Usage</h4>
+                                
+                            </div>
+                            <div class="content">
+                           
+                                <div id="chartHours" class="ct-chart"><div id="column_chart" [chartData]="this.area_ChartData" [chartOptions] = "this.area_ChartOptions" chartType="AreaChart" GoogleChart></div></div>
+                                <div class="footer">
+                                   
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                 <div class="content">
+            <div class="container-fluid">
+                <div class="col-md-15">
+                        <div class="card">
+            
+                        
+                            <div class="header">
+                                <h4 class="title">Current Usage</h4>
+                                <div id="chartHours" class="ct-chart">
+                                <td  *ngIf ="port1 != null"  id="gauge_chart" [chartData]="this.gauge_ChartData" [chartOptions] = "this.gauge_ChartOptions" chartType="Gauge" GoogleChart></td>
+                                <td *ngIf ="port2 != null" id="gauge_chart" [chartData]="this.gauge_ChartData2" [chartOptions] = "this.gauge_ChartOptions" chartType="Gauge" GoogleChart></td>
+                               <td *ngIf ="port3 != null" id="gauge_chart" [chartData]="this.gauge_ChartData3" [chartOptions] = "this.gauge_ChartOptions" chartType="Gauge" GoogleChart></td>
+
+                                
+                            </div>
+                            </div>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+                        
+                            
+                            
+                               
+                               
+                                
+                                
+            <div class="content">
+            <div class="container-fluid">
+                <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Device Status</h4>
+                                 <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                      <thead>
+                                        <th>Port Status:</th>
+                                       </thead>
+                                       <tbody>
+                                 <td *ngFor="let items of devicedata">
+                                           <tbody><td> {{items.status}}</td> </tbody> 
+                                           
+                                        </td>
+</tbody>
+
+
+                                    </table>
+                                    </div>
+                            </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                 <div class="content">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Usage Log</h4>
+                               
+
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Time</th>
+                                        <th>User ID</th>
+                                        <th>Usage</th>
+                                        <th>Duration</th>
+                                        <th>Cost</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let items of devicetable">
+                                            <td>{{items.$key}}</td>
+                                            <td>{{items.user_id}}</td>
+                                            <td>{{items.usage}}</td>
+                                            <td>{{items.duration}}</td>
+                                            <td>{{items.cost}}</td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+ <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="http://www.drivamp.com">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Company
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; 2016 <a href="http://www.drivamp.com">DrivAMP LLP</a>, powering the vehicles of tomorrow.
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

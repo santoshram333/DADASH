@@ -1,4 +1,4 @@
-
+<div *ngIf='userKey'>
 <app-navbar></app-navbar>
 <app-sidebar></app-sidebar>
 
@@ -32,7 +32,7 @@
                                 <div id="chartHours" class="ct-chart"><div id="column_chart" [chartData]="this.column_ChartData" [chartOptions] = "this.column_ChartOptions" chartType="ColumnChart" GoogleChart></div></div>
                                 <div class="footer">
                                    
-                                    <hr>
+                                    
                                     
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-<div class="col-md-15">
+<div class="col-md-12">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Usage Log</h4>
@@ -56,7 +56,7 @@
                                         <th>Cost</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let items of usages">
+                                        <tr *ngFor="let items of usagetable">
                                             <td>{{items.$key}}</td>
                                             <td>{{items.device_id}}</td>
                                             <td>{{items.usage}}</td>
@@ -71,33 +71,42 @@
                         </div>
                     </div>
 
-
-                <div class="row">
-                    <div class="col-md-15">
+<div class="col-md-12">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">EVSE usage E2W and E4W</h4>
-                                <p class="category">Monthy usage.</p>
+                                <h4 class="title">DrivAMP User Forum</h4>
+                            <br />    
                             </div>
-                            <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
+                            <div class ="card">
 
-                                <div class="footer">
-                                    <div class="legend">
-                                        <i class="fa fa-circle text-info"></i> S1 - 1 connector
-                                        <i class="fa fa-circle text-danger"></i> S3 - 3 connectors
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-check"></i> Data information certified
-                                    </div>
+                           <input type="text" id="message"  placeholder="Your Suggestions Here" (keyup.enter)="this.chatSend($event.target.value)" [(ngModel)]= "msgVal" /></div>
+                            <div class="content">
+                                <div class="table-full-width">
+
+                                    <table class="table">
+                                        <tbody>
+                                    
+                                                    
+                                                     
+                                                    
+                                                
+                                            <tr *ngFor="let item of msgs | async">
+                                                
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.message}}</td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
+
+                              </div> 
+
+                            
                         </div>
                     </div>
-
-                   
-                </div>
+              
             </div>
         </div>
 
@@ -107,7 +116,7 @@
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="http://www.drivamp.com">
                                 Home
                             </a>
                         </li>
@@ -180,3 +189,4 @@
     </script>
 
 </html>
+</div>
