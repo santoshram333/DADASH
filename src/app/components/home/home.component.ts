@@ -19,25 +19,7 @@ export class HomeComponent implements OnInit {
    usages:any;
   constructor(public af: AngularFire, 
               public flashMessage: FlashMessagesService,private router:Router,private firebaseService:FirebaseService) {
-    /*  this.af.auth.subscribe((auth) => {
-    if (auth!=null) {
-       this.router.navigate(['/listings']);
-
-         
-      }
-      else
-      {
-        
-        this.router.navigate(['']);
-      }
-  });*/
-
-  }
-   
-  ngOnInit() {
-
-
-this.af.auth.subscribe((auth) => {
+    this.af.auth.subscribe((auth) => {
     if (auth) {
           
 
@@ -65,6 +47,12 @@ this.af.auth.subscribe((auth) => {
 
       }
   });
+  }
+   
+  ngOnInit() {
+
+
+
 
 
   }

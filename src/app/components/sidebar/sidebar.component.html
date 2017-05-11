@@ -1,4 +1,6 @@
-<div class="sidebar" data-color="blue" data-image-src="assets/img/sidebar-6.jpg">
+
+
+
 
     <!--
 
@@ -6,11 +8,12 @@
         Tip 2: you can also add an image using data-image tag
 
     -->
-
+<div class="sidebar" data-color="blue">
         <div class="sidebar-wrapper">
             <div class="logo">
-                <br>
-                   
+                <a href="http://www.drivamp.com" class="simple-text">
+                   <img src="assets/img/logo_nocaption.png" height="50" width="175">
+                </a>
                
             </div>
 
@@ -27,22 +30,29 @@
                         <p>User Profile</p>
                     </a>
                 </li>
-               <li>
+
+               <li><a (click) = "getdevicelist()">
                         <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-2">
                             <span class="sidebar-icon"><i class="pe-7s-box2"></i></span>
-                            <span class="sidebar-title "><a (click) = "getdevicelist()">Devices</a></span>
-                            <b class="caret"></b>
+                            <span class="sidebar-title ">Devices</span>
+                            <b class="caret"></b></a>
                         </a>
+
                         <ul id="submenu-2" class="panel-collapse collapse panel-switch" role="menu">
                         <ul *ngFor="let items of devices">
                         <li><a [routerLink]="['/listing/'+ items.$key]">{{items.$key}}</a></li>
-                        <li>Add a Device</li></ul></ul>
+                        </ul></ul>
                         
                             
                        
                     </li>
+                     <li>
+                <a [routerLink]="['/addadevice']"><i class="pe-7s-plus"></i>
+                <p>Add a Device</p>
+                </a>
+                </li>
                <li>
-                    <a >
+                    <a (click) = "map()">
                         <i class="pe-7s-map-marker"></i>
                         <p>Maps</p>
                     </a>

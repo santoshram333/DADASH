@@ -19,14 +19,14 @@ userKey:any;
 uid:any;
 devices:any;
 usage:any;
-
+name:any;
   constructor(public af:AngularFire,private firebaseService:FirebaseService,private router:Router,private auth:AngularFireAuth) 
   {
 
   	this.af.auth.subscribe((auth) => {
     if (auth) {
        
-          
+          this.name=auth;
           this.user = this.af.database.object('users/' + auth.uid);
           this.userKey = auth.uid;
           //console.log(this.userKey);
@@ -49,5 +49,9 @@ getdevicelist()
      });
 }
 
+map(){
+
+  this.router.navigate(['/maps']);
+}
  }
 

@@ -18,6 +18,9 @@ export class FirebaseService {
   device:FirebaseListObservable<any[]>;
  devices2:FirebaseObjectObservable<any>;
 device3:FirebaseObjectObservable<any>;
+a:any;
+costup: FirebaseObjectObservable<any>;
+
   constructor(private af:AngularFire,private router : Router,) {
   	this.folder="listingimages";
     this.listings = this.af.database.list('/listings') as FirebaseListObservable<Listing[]>
@@ -47,7 +50,7 @@ device3:FirebaseObjectObservable<any>;
    return this.listing;
   }
 
-  addListing(listing){
+  adddevice(listing,id){
   	//create root ref
   	//let storageRef = firebase.storage().ref();
   //	for(let  selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]] ){
@@ -56,12 +59,65 @@ device3:FirebaseObjectObservable<any>;
   		//iRef.put(selectedFile).then((snapshot) => {
   		//	listing.image = selectedFile.name;
   		//	listing.path = path;
-      this.usages = this.af.database.object('/user_info/' + this.userKey) as FirebaseObjectObservable<Listing>
+      this.usages = this.af.database.object('/owners/' + this.userKey + '/' + id) as FirebaseObjectObservable<Listing>
       
   			return this.usages.update(listing);
   		
 
   	
+  }
+   adddevice2(listing){
+    //create root ref
+    //let storageRef = firebase.storage().ref();
+  //  for(let  selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]] ){
+    //  let path = `/${this.folder}/${selectedFile.name}`;
+      //let iRef = storageRef.child(path);
+      //iRef.put(selectedFile).then((snapshot) => {
+      //  listing.image = selectedFile.name;
+      //  listing.path = path;
+      
+      this.usages = this.af.database.object('/reg_device/' )  as FirebaseObjectObservable<Listing>
+    this.a = {} ;
+    this.a[listing.device_id] = "true";
+       return this.usages.update(this.a);
+      
+
+    
+  }
+  adddevice3(listing,id){
+    //create root ref
+    //let storageRef = firebase.storage().ref();
+  //  for(let  selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]] ){
+    //  let path = `/${this.folder}/${selectedFile.name}`;
+      //let iRef = storageRef.child(path);
+      //iRef.put(selectedFile).then((snapshot) => {
+      //  listing.image = selectedFile.name;
+      //  listing.path = path;
+      
+      this.usages = this.af.database.object('/cordinates/' + id )  as FirebaseObjectObservable<Listing>
+      
+       return this.usages.update(listing);
+      
+
+    
+  }
+   
+
+  addListing(listing){
+    //create root ref
+    //let storageRef = firebase.storage().ref();
+  //  for(let  selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]] ){
+    //  let path = `/${this.folder}/${selectedFile.name}`;
+      //let iRef = storageRef.child(path);
+      //iRef.put(selectedFile).then((snapshot) => {
+      //  listing.image = selectedFile.name;
+      //  listing.path = path;
+      this.usages = this.af.database.object('/user_info/' + this.userKey) as FirebaseObjectObservable<Listing>
+      
+        return this.usages.update(listing);
+      
+
+    
   }
  addListing2(listing){
     //create root ref
@@ -199,6 +255,27 @@ getport3(e){
     
 
     return this.device3;
+
+}
+getcost(cost,id){
+    
+      this.costup = this.af.database.object('/devices/' + id ) as FirebaseObjectObservable<cd1>
+   
+
+    return this.costup.update({'cost':cost});
+
+
+
+}
+
+getcost2(cost,id){
+     
+      this.costup = this.af.database.object('/owners/' + this.userKey + '/' + id ) as FirebaseObjectObservable<cd1>
+   
+
+    return this.costup.update({'cost':cost});
+
+
 
 }
 }

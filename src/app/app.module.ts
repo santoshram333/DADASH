@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,ApplicationRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import { AngularFireModule,AuthProviders, AuthMethods } from 'angularfire2';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import {GoogleChart} from 'angular2-google-chart/directives/angular2-google-chart.directive';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { CommonModule } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
@@ -18,7 +20,10 @@ import { EditListingComponent } from './components/edit-listing/edit-listing.com
 import { FirebaseService } from './services/firebase.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
-import { AdddeviceComponent } from './components/adddevice/adddevice.component';
+import { AddadeviceComponent } from './components/addadevice/addadevice.component';
+import { MapsComponent } from './components/maps/maps.component';
+
+
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDTBig8HtTwZhJFDs2xifl3LlplUDZcxok',
@@ -39,7 +44,9 @@ const appRoutes : Routes = [
 {path:'listing/:id',component:ListingComponent},
 {path:'add-listing',component:AddListingComponent},
 {path:'edit-listing/:id',component:EditListingComponent},
-{path:'userprofile',component:UserprofileComponent}
+{path:'userprofile',component:UserprofileComponent},
+{path:'addadevice',component:AddadeviceComponent},
+{path:'maps',component:MapsComponent}
 ]
 
 @NgModule({
@@ -54,7 +61,11 @@ const appRoutes : Routes = [
     SidebarComponent,
     UserprofileComponent,
     GoogleChart,
-    AdddeviceComponent
+    AddadeviceComponent,
+    MapsComponent
+    
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -63,6 +74,9 @@ const appRoutes : Routes = [
     FlashMessagesModule,
     AngularFireModule.initializeApp(firebaseConfig,firebaseAuthConfig),
     RouterModule.forRoot(appRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBz4Uq8IgXPj_PbWiw8ZXrUjUIURcRTW0w'
+    })
 
   ],
   providers: [FirebaseService],

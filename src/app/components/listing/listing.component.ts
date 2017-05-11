@@ -23,6 +23,11 @@ export class ListingComponent implements OnInit {
    port1:any;
    port2:any;
    port3:any;
+  public datasum1:any[];
+  public datasum2:any[];
+  public datasum3:any[];
+  cost:any[];
+  value:any[];
   constructor(private firebaseService: FirebaseService,
               private router : Router,
               private route : ActivatedRoute
@@ -46,7 +51,7 @@ export class ListingComponent implements OnInit {
   for (var i = 1;i < this.device.length + 1;i++){
 
      a[i] = this.device[i-1].cost + a[i-1];
-     b[i-1] = this.device[i-1].$key;
+     b[i-1] = new Date(this.device[i-1].$key*1000).toString();
      c[i-1] = this.device[i-1].usage;
      d[i-1] = this.device[i-1].duration;
    } 
@@ -65,6 +70,23 @@ export class ListingComponent implements OnInit {
     });
   this.firebaseService.getdevicetable(this.id).subscribe(devicetable => {
   this.devicetable= devicetable;
+  this.value=this.devicedata[0].$value;
+  console.log(this.value);
+   var f = new Array(this.devicetable.length);
+      f[0] = 0;
+       var g = new Array(this.devicetable.length);
+      g[0] = 0;
+      var h = new Array(this.devicetable.length);
+      h[0] = 0;   
+   for (var i = 1;i < this.devicetable.length + 1;i++){
+     f[i] = this.devicetable[i-1].cost + f[i-1];
+      g[i] = this.device[i-1].usage + g[i-1];
+       h[i] = this.device[i-1].duration + h[i-1];
+   } 
+   this.datasum1=f[this.devicetable.length];
+   this.datasum2=g[this.devicetable.length];
+   this.datasum3=h[this.devicetable.length];
+   
 });
 
 
@@ -72,14 +94,14 @@ this.firebaseService.getdevicedata(this.id).subscribe(devicedata => {
 this.devicedata= devicedata;
   
 this.e = [this.devicedata[1].usage_id,this.devicedata[2].usage_id,this.devicedata[3].usage_id];
-  //console.log(this.e[0]);
+  console.log(this.devicedata);
   this.firebaseService.getport1(this.e[0]).subscribe(port1 => {
   this.port1= port1;
   console.log(this.port1);
   var a= this.port1.usage;
   this.gauge_ChartData = [
         ['Label', 'Value'],
-        [' Usage', a],
+        [this.devicedata[1].status, a],
         ];
  //console.l
 });
@@ -89,7 +111,7 @@ this.e = [this.devicedata[1].usage_id,this.devicedata[2].usage_id,this.devicedat
    var b= this.port2.usage;
     this.gauge_ChartData2 = [
         ['Label', 'Value'],
-        [' Usage', b],
+        [this.devicedata[2].status, b],
         ];
 });
 
@@ -98,7 +120,7 @@ this.port3= port3;
 var c= this.port3.usage;
 this.gauge_ChartData3 = [
         ['Label', 'Value'],
-        [' Usage', c],
+        [this.devicedata[3].status, c],
         ];
  console.log(this.port3);
 });
@@ -118,7 +140,12 @@ this.firebaseService.getport3(this.e[2]).subscribe(port3 => {
 });
 
 */
+//this.firebaseService.getcost(this.id).subscribe(devicedata => {
+//this.devicedata= devicedata;
 
+
+
+//});
    
 
      }
@@ -127,7 +154,18 @@ this.firebaseService.getport3(this.e[2]).subscribe(port3 => {
   	
 
   }
-   
+
+   onAddSubmit(){
+
+    this.firebaseService.getcost(this.cost,this.id);
+       this.firebaseService.getcost2(this.cost,this.id);
+       this.router.navigate(['/listing/'+ this.id ]);
+
+
+
+
+
+   }
 
 public area_ChartOptions = {
         title: '',

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
+import { AngularFire } from 'angularfire2';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 
 @Component({
@@ -23,8 +25,17 @@ about_me:any;
 
   constructor(
               private firebaseService:FirebaseService,
-              private router:Router
-  	) { }
+              private router:Router,public af:AngularFire,
+              private auth:AngularFireAuth
+  	) { 
+              this.af.auth.subscribe((auth) => {
+              if (auth) {} 
+              else{
+  this.router.navigate(['']);
+ }
+ 
+ });
+}
 
   ngOnInit() {
     

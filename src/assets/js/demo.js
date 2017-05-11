@@ -111,7 +111,7 @@ demo = {
     },
     
     initGoogleMaps: function(){
-        var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+        var myLatlng = new google.maps.LatLng(12.929255,  77.684304);
         var mapOptions = {
           zoom: 13,
           center: myLatlng,
@@ -135,7 +135,7 @@ demo = {
     	
     	$.notify({
         	icon: "pe-7s-gift",
-        	message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+        	message: ""
         	
         },{
             type: type[color],
